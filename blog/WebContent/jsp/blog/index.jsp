@@ -9,7 +9,6 @@
 <link rel="shortcut icon" type="image/x-icon" href="${base}/static/image/favicon.ico" media="screen" />
 <%@include file="../css-file.jsp" %>
 <link rel="stylesheet" href="${base}/static/js/jstree/dist/themes/default/style.min.css" />
-<link rel="stylesheet" href="${base}/static/css/blog.css" />
 <%@include file="../js-file.jsp" %>
 <script src="${base}/static/js/jstree/dist/jstree.min.js"></script>
 <script>
@@ -35,16 +34,22 @@
 			jsTree.select_node('0');
 		});
 		$('#js-tree').on("select_node.jstree", function (e, data) {
-			if(data.selected[0] == 0){
-				$("#blogDetailContent").load("${base}/blog/myBlogView?startPage=0");
-				$("#renameTypeNameBtn").attr("disabled","true");
-				$("#deleteTypeNameBtn").attr("disabled","true");
-			}else{
-				$("#blogDetailContent").load("${base}/blog/myBlogView?blogTypeId="+data.selected[0]+"&startPage=0");
-				$("#renameTypeNameBtn").removeAttr("disabled");
-				$("#deleteTypeNameBtn").removeAttr("disabled");
-			}
-			$(".loadMore").on("click").html("load more").attr("attr","1");
+			refresh();
+		});
+		$(document).on("click","#addSubject",function(){
+			sel = jsTree.get_selected();
+			if(!sel.length) { return false; }
+			var subjectTitle = $("#subjectTitle").val();
+			$.ajax({
+				url : '${base}/blog/addSubject',
+				data : 'subjectTitle='+subjectTitle+'&blogTypeId='+sel[0],
+				dataType : 'json',
+				success : function(ajaxData){
+					ajaxHandle(ajaxData,function(){
+						refresh();
+					});
+				}
+			});
 		});
 	});
 	function addRssType(){
@@ -66,6 +71,18 @@
 				}
 			});
 		});
+	}
+	function refresh(){
+		sel = jsTree.get_selected();
+		if(sel[0] == 0){
+			$("#blogDetailContent").load("${base}/blog/myBlogView?startPage=0");
+			$("#renameTypeNameBtn").attr("disabled","true");
+			$("#deleteTypeNameBtn").attr("disabled","true");
+		}else{
+			$("#blogDetailContent").load("${base}/blog/myBlogView?blogTypeId="+sel[0]+"&startPage=0");
+			$("#renameTypeNameBtn").removeAttr("disabled");
+			$("#deleteTypeNameBtn").removeAttr("disabled");
+		}
 	}
 	function renameRssType(){
 		sel = jsTree.get_selected();
@@ -214,11 +231,11 @@
 			    <button class="btn btn-default">返回</button>
 				<button type="button" class="btn btn-default" style="float:right;" data-placement="bottom" data-html="true" title="新增RSS" data-content='<form role="form" class="form-inline" style="width:300px;">
 			        <div class="form-group" >
-			        <label for="exampleInputEmail2" class="sr-only">新增类型</label>
-			        <input type="text" placeholder="blog" id="blogLink" class="form-control">
+			        <label for="exampleInputEmail2" class="sr-only">新增主题</label>
+			        <input type="text" placeholder="subject" id="subjectTitle" class="form-control">
 			        </div>
-			        <button class="btn btn-default" id="book" type="button">新增</button><button class="btn btn-default" style="margin-left:5px;" onClick="closeDialog();" type="button">关闭</button>
-			        </form>' title="" data-toggle="popover" class="btn btn-large btn-danger" href="#" data-original-title="blog地址" id="renameTypeNameBtn">新增RSS
+			        <button class="btn btn-default" id="addSubject" type="button">新增</button><button class="btn btn-default" style="margin-left:5px;" onClick="closeDialog();" type="button">关闭</button>
+			        </form>' title="" data-toggle="popover" class="btn btn-large btn-danger" href="#" data-original-title="blog地址" id="renameTypeNameBtn">新增主题
 			    </button>
 			</div>
 			<div class="panel-body">

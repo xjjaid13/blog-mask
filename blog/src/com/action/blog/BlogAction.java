@@ -120,4 +120,22 @@ public class BlogAction extends BaseAction{
 		return "blog/subject";
 	}
 	
+	@RequestMapping("addSubject")
+	public void addSubject(BlogSubject blogSubject,HttpServletResponse response) throws IOException{
+		blogSubjectMapperService.insert(blogSubject);
+		writeResult(response, createJosnObject());
+	}
+	
+	@RequestMapping("updateSubject")
+	public void updateSubject(BlogSubject blogSubject,HttpServletResponse response) throws IOException{
+		blogSubjectMapperService.update(blogSubject);
+		writeResult(response, createJosnObject());
+	}
+	
+	@RequestMapping("deleteSubject")
+	public void deleteSubject(BlogSubject blogSubject,HttpServletResponse response) throws IOException{
+		blogSubjectMapperService.update(blogSubject);
+		writeResult(response, createJosnObject());
+	}
+	
 }

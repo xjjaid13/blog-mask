@@ -45,6 +45,6 @@
   <delete id="deleteByIds" parameterType="BlogSubject">delete from blog_subject where blogSubjectId in (${ids})</delete>
   <select id="maxId" resultType="java.lang.Integer">select max(blogSubjectId) from blog_subject</select>
   <select id="selectSubjectByType" resultType="java.util.List" resultMap="blogSubject">
-  	select a.* from blog_subject a LEFT JOIN blog_type b on a.blogTypeId = b.blogTypeId where 1 = 1 <if test="blogTypeId != null">b.parentString like '%;${blogTypeId};%'</if> <if test="startPage != -1">limit #{startPage},#{page}</if> 
+  	select a.* from blog_subject a LEFT JOIN blog_type b on a.blogTypeId = b.blogTypeId where 1 = 1 <if test="blogTypeId != null"> and b.parentString like '%;${blogTypeId};%' or b.blogTypeId = #{blogTypeId}</if> <if test="startPage != -1">limit #{startPage},#{page}</if> 
   </select>
 </mapper>
