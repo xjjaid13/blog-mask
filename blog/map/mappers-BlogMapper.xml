@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.BlogMapperDao">
+  <resultMap id="blog" type="Blog">
+    <result property="blogId" column="blogId"/>
+    <result property="title" column="title"/>
+    <result property="content" column="content"/>
+    <result property="createDate" column="createDate"/>
+    <result property="hit" column="hit"/>
+    <result property="userId" column="userId"/>
+    <result property="shortContent" column="shortContent"/>
+    <result property="commentnum" column="commentnum"/>
+    <result property="subjectId" column="subjectId"/>
+    <result property="keywords" column="keywords"/>
+  </resultMap>
+  <select id="select" resultType="java.util.Map" resultMap="blog">select * from blog where 1 = 1 
+    <if test="blogId != null">and blogId = #{blogId}</if>  
+    <if test="title != null">and title = #{title}</if>  
+    <if test="content != null">and content = #{content}</if>  
+    <if test="createDate != null">and createDate = #{createDate}</if>  
+    <if test="hit != null">and hit = #{hit}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="shortContent != null">and shortContent = #{shortContent}</if>  
+    <if test="commentnum != null">and commentnum = #{commentnum}</if>  
+    <if test="subjectId != null">and subjectId = #{subjectId}</if>  
+    <if test="keywords != null">and keywords = #{keywords}</if>  
+    <if test="condition != null">${condition}</if>
+  </select>
+  <select id="selectList" resultType="java.util.List" resultMap="blog">select * from blog where 1 = 1 
+    <if test="blogId != null">and blogId = #{blogId}</if>  
+    <if test="title != null">and title = #{title}</if>  
+    <if test="content != null">and content = #{content}</if>  
+    <if test="createDate != null">and createDate = #{createDate}</if>  
+    <if test="hit != null">and hit = #{hit}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="shortContent != null">and shortContent = #{shortContent}</if>  
+    <if test="commentnum != null">and commentnum = #{commentnum}</if>  
+    <if test="subjectId != null">and subjectId = #{subjectId}</if>  
+    <if test="keywords != null">and keywords = #{keywords}</if>  
+    <if test="condition != null">${condition}</if>  
+    <if test="startPage != -1">limit #{startPage},#{page}</if> 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">select count(blogId) from blog where 1 = 1 
+    <if test="blogId != null">and blogId = #{blogId}</if>  
+    <if test="title != null">and title = #{title}</if>  
+    <if test="content != null">and content = #{content}</if>  
+    <if test="createDate != null">and createDate = #{createDate}</if>  
+    <if test="hit != null">and hit = #{hit}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="shortContent != null">and shortContent = #{shortContent}</if>  
+    <if test="commentnum != null">and commentnum = #{commentnum}</if>  
+    <if test="subjectId != null">and subjectId = #{subjectId}</if>  
+    <if test="keywords != null">and keywords = #{keywords}</if>  
+    <if test="condition != null">${condition}</if> 
+  </select>
+  <insert id="insert" parameterType="Blog">insert into blog (blogId,title,content,createDate,hit,userId,shortContent,commentnum,subjectId,keywords) values (#{blogId},#{title},#{content},#{createDate},#{hit},#{userId},#{shortContent},#{commentnum},#{subjectId},#{keywords})</insert>
+  <update id="update" parameterType="Blog">update blog 
+    <set> 
+      <if test="blogId != null">blogId = #{blogId},</if>
+      <if test="title != null">title = #{title},</if>
+      <if test="content != null">content = #{content},</if>
+      <if test="createDate != null">createDate = #{createDate},</if>
+      <if test="hit != null">hit = #{hit},</if>
+      <if test="userId != null">userId = #{userId},</if>
+      <if test="shortContent != null">shortContent = #{shortContent},</if>
+      <if test="commentnum != null">commentnum = #{commentnum},</if>
+      <if test="subjectId != null">subjectId = #{subjectId},</if>
+      <if test="keywords != null">keywords = #{keywords},</if> 
+    </set> where 1 = 1 
+    <if test="blogId != null">and blogId = #{blogId}</if>
+    <if test="condition != null">${condition}</if>
+  </update>
+  <delete id="delete" parameterType="Blog">delete from blog where 1 = 1 
+    <if test="blogId != null">and blogId = #{blogId}</if>  
+    <if test="title != null">and title = #{title}</if>  
+    <if test="content != null">and content = #{content}</if>  
+    <if test="createDate != null">and createDate = #{createDate}</if>  
+    <if test="hit != null">and hit = #{hit}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="shortContent != null">and shortContent = #{shortContent}</if>  
+    <if test="commentnum != null">and commentnum = #{commentnum}</if>  
+    <if test="subjectId != null">and subjectId = #{subjectId}</if>  
+    <if test="keywords != null">and keywords = #{keywords}</if>  
+    <if test="condition != null">${condition}</if>
+  </delete>
+  <delete id="deleteByIds" parameterType="Blog">delete from blog where blogId in (${ids})</delete>
+  <select id="maxId" resultType="java.lang.Integer">select max(blogId) from blog</select>
+</mapper>

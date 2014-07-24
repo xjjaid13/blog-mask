@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+.pointer{
+	cursor:pointer;	
+}
+a:hover{
+	text-decoration : none;
+}
+.popover{
+	max-width : 316px;
+}

@@ -1,0 +1,16 @@
+body{_background-image: url(about:blank);/*用浏览器空白页面作为背景*/ _background-attachment: fixed;/*IE6 不闪动*/}
+
+/* xDialog css */
+.xDialog{font-family: Microsoft Yahei,Arial;font-size:12px;z-index:9001;display:none}
+.xDialog p{margin: 0;padding: 0;}
+.xDialog input, textarea{border: 1px solid #CCC;margin: 0;padding: 0;font-family: Microsoft Yahei,Arial;}
+.xDialog .x-header{padding: 0 10px;height:30px;font-size: 14px;background-color:#F1F1F1;color:#666;position: relative;}
+.xDialog .x-header .x-title{height:30px;line-height: 30px;font-weight: bold;display: inline-block;margin-right: 20px}
+.xDialog .x-header .x-close{height:30px;line-height: 30px;position: absolute;right: 10px;cursor: pointer;font-weight: bold;color:#666;display: inline-block;}
+.xDialog .x-content{color: #585858;background-color: #FFFFFF;line-height: 1.4em;}
+.xDialog .x-buttons{font-size: 12px;background-color: #F1F1F1;text-align: right;height:50px;line-height: 50px;}
+.xDialog .x-buttons .x-ok{margin-right: 10px;}
+.xDialog .x-buttons .x-cancel{margin-right: 15px;}
+.xDialog.border{box-shadow: 0 4px 16px rgba(0,0,0,.2);background: #F1F1F1;outline: 0;}
+.xDialog.fixed{border:1px solid #AAAAAA;position:fixed;_position:absolute;_right:16px;top:50%;left:50%;_top:expression(document.documentElement.scrollTop + Math.round(document.documentElement.offsetHeight / 2) + 'px');/*IE6 动态设置top位置*/}
+

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.WebLinkMapperDao">
+  <resultMap id="webLink" type="WebLink">
+    <result property="webLinkId" column="webLinkId"/>
+    <result property="name" column="name"/>
+    <result property="link" column="link"/>
+    <result property="webLinktypeId" column="webLinktypeId"/>
+    <result property="userId" column="userId"/>
+    <result property="hit" column="hit"/>
+    <result property="host" column="host"/>
+    <result property="description" column="description"/>
+    <result property="icon" column="icon"/>
+  </resultMap>
+  <select id="select" resultType="java.util.Map" resultMap="webLink">select * from web_link where 1 = 1 
+    <if test="webLinkId != null">and webLinkId = #{webLinkId}</if>  
+    <if test="name != null">and name = #{name}</if>  
+    <if test="link != null">and link = #{link}</if>  
+    <if test="webLinktypeId != null">and webLinktypeId = #{webLinktypeId}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="hit != null">and hit = #{hit}</if>  
+    <if test="host != null">and host = #{host}</if>  
+    <if test="description != null">and description = #{description}</if>  
+    <if test="icon != null">and icon = #{icon}</if>  
+    <if test="condition != null">${condition}</if>
+  </select>
+  <select id="selectList" resultType="java.util.List" resultMap="webLink">select * from web_link where 1 = 1 
+    <if test="webLinkId != null">and webLinkId = #{webLinkId}</if>  
+    <if test="name != null">and name = #{name}</if>  
+    <if test="link != null">and link = #{link}</if>  
+    <if test="webLinktypeId != null">and webLinktypeId = #{webLinktypeId}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="hit != null">and hit = #{hit}</if>  
+    <if test="host != null">and host = #{host}</if>  
+    <if test="description != null">and description = #{description}</if>  
+    <if test="icon != null">and icon = #{icon}</if>  
+    <if test="condition != null">${condition}</if>  
+    <if test="startPage != -1">limit #{startPage},#{page}</if> 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">select count(webLinkId) from web_link where 1 = 1 
+    <if test="webLinkId != null">and webLinkId = #{webLinkId}</if>  
+    <if test="name != null">and name = #{name}</if>  
+    <if test="link != null">and link = #{link}</if>  
+    <if test="webLinktypeId != null">and webLinktypeId = #{webLinktypeId}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="hit != null">and hit = #{hit}</if>  
+    <if test="host != null">and host = #{host}</if>  
+    <if test="description != null">and description = #{description}</if>  
+    <if test="icon != null">and icon = #{icon}</if>  
+    <if test="condition != null">${condition}</if> 
+  </select>
+  <insert id="insert" parameterType="WebLink">insert into web_link (webLinkId,name,link,webLinktypeId,userId,hit,host,description,icon) values (#{webLinkId},#{name},#{link},#{webLinktypeId},#{userId},#{hit},#{host},#{description},#{icon})</insert>
+  <update id="update" parameterType="WebLink">update web_link 
+    <set> 
+      <if test="webLinkId != null">webLinkId = #{webLinkId},</if>
+      <if test="name != null">name = #{name},</if>
+      <if test="link != null">link = #{link},</if>
+      <if test="webLinktypeId != null">webLinktypeId = #{webLinktypeId},</if>
+      <if test="userId != null">userId = #{userId},</if>
+      <if test="hit != null">hit = #{hit},</if>
+      <if test="host != null">host = #{host},</if>
+      <if test="description != null">description = #{description},</if>
+      <if test="icon != null">icon = #{icon},</if> 
+    </set> where 1 = 1 
+    <if test="webLinkId != null">and webLinkId = #{webLinkId}</if>
+    <if test="condition != null">${condition}</if>
+  </update>
+  <delete id="delete" parameterType="WebLink">delete from web_link where 1 = 1 
+    <if test="webLinkId != null">and webLinkId = #{webLinkId}</if>  
+    <if test="name != null">and name = #{name}</if>  
+    <if test="link != null">and link = #{link}</if>  
+    <if test="webLinktypeId != null">and webLinktypeId = #{webLinktypeId}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="hit != null">and hit = #{hit}</if>  
+    <if test="host != null">and host = #{host}</if>  
+    <if test="description != null">and description = #{description}</if>  
+    <if test="icon != null">and icon = #{icon}</if>  
+    <if test="condition != null">${condition}</if>
+  </delete>
+  <delete id="deleteByIds" parameterType="WebLink">delete from web_link where webLinkId in (${ids})</delete>
+  <select id="maxId" resultType="java.lang.Integer">select max(webLinkId) from web_link</select>
+</mapper>

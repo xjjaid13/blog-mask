@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.NoteTimeMapperDao">
+  <resultMap id="noteTime" type="NoteTime">
+    <result property="noteTimeId" column="noteTimeId"/>
+    <result property="type" column="type"/>
+    <result property="value" column="value"/>
+    <result property="parentId" column="parentId"/>
+    <result property="userId" column="userId"/>
+    <result property="displayValue" column="displayValue"/>
+  </resultMap>
+  <select id="select" resultType="java.util.Map" resultMap="noteTime">select * from note_time where 1 = 1 
+    <if test="noteTimeId != null">and noteTimeId = #{noteTimeId}</if>  
+    <if test="type != null">and type = #Integer</if>  
+    <if test="value != null">and value = #{value}</if>  
+    <if test="parentId != null">and parentId = #{parentId}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="displayValue != null">and displayValue = #{displayValue}</if>  
+    <if test="condition != null">${condition}</if>
+  </select>
+  <select id="selectList" resultType="java.util.List" resultMap="noteTime">select * from note_time where 1 = 1 
+    <if test="noteTimeId != null">and noteTimeId = #{noteTimeId}</if>  
+    <if test="type != null">and type = #Integer</if>  
+    <if test="value != null">and value = #{value}</if>  
+    <if test="parentId != null">and parentId = #{parentId}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="displayValue != null">and displayValue = #{displayValue}</if>  
+    <if test="condition != null">${condition}</if>  
+    <if test="startPage != -1">limit #{startPage},#{page}</if> 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">select count(noteTimeId) from note_time where 1 = 1 
+    <if test="noteTimeId != null">and noteTimeId = #{noteTimeId}</if>  
+    <if test="type != null">and type = #Integer</if>  
+    <if test="value != null">and value = #{value}</if>  
+    <if test="parentId != null">and parentId = #{parentId}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="displayValue != null">and displayValue = #{displayValue}</if>  
+    <if test="condition != null">${condition}</if> 
+  </select>
+  <insert id="insert" parameterType="NoteTime">insert into note_time (noteTimeId,type,value,parentId,userId,displayValue) values (#{noteTimeId},#Integer,#{value},#{parentId},#{userId},#{displayValue})</insert>
+  <update id="update" parameterType="NoteTime">update note_time 
+    <set> 
+      <if test="noteTimeId != null">noteTimeId = #{noteTimeId},</if>
+      <if test="type != null">type = #Integer,</if>
+      <if test="value != null">value = #{value},</if>
+      <if test="parentId != null">parentId = #{parentId},</if>
+      <if test="userId != null">userId = #{userId},</if>
+      <if test="displayValue != null">displayValue = #{displayValue},</if> 
+    </set> where 1 = 1 
+    <if test="noteTimeId != null">and noteTimeId = #{noteTimeId}</if>
+    <if test="condition != null">${condition}</if>
+  </update>
+  <delete id="delete" parameterType="NoteTime">delete from note_time where 1 = 1 
+    <if test="noteTimeId != null">and noteTimeId = #{noteTimeId}</if>  
+    <if test="type != null">and type = #Integer</if>  
+    <if test="value != null">and value = #{value}</if>  
+    <if test="parentId != null">and parentId = #{parentId}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="displayValue != null">and displayValue = #{displayValue}</if>  
+    <if test="condition != null">${condition}</if>
+  </delete>
+  <delete id="deleteByIds" parameterType="NoteTime">delete from note_time where noteTimeId in (${ids})</delete>
+  <select id="maxId" resultType="java.lang.Integer">select max(noteTimeId) from note_time</select>
+</mapper>

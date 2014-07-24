@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+.topic-avatar {
+    float: left;
+    height: 50px;
+    margin-top: 4px;
+    position: relative;
+    width: 50px;
+}
+
+.topic-item-content {
+    margin: -3px 0 0 64px;
+}
+.topic-item-title {
+    margin-bottom: 6px;
+    word-break: break-all;
+}
+.topic-feed-item {
+    margin-bottom: 6px;
+}
+a {
+    color: #259;
+    text-decoration: none;
+}
+.zg-clear:before, .zg-clear:after {
+    content: " ";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.topic-item-title-link {
+    color: #222;
+}
+.zg-gray {
+    color: #999;
+    font-size: 12px;
+    font-weight: 400;
+}
+.cancelSubscribe{
+	color : grey;
+	font-size : 12px;
+}

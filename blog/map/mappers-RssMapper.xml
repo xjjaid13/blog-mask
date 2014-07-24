@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.RssMapperDao">
+  <resultMap id="rss" type="Rss">
+    <result property="rssId" column="rssId"/>
+    <result property="rssTitle" column="rssTitle"/>
+    <result property="rssUrl" column="rssUrl"/>
+    <result property="rssIcon" column="rssIcon"/>
+    <result property="fingePrint" column="fingePrint"/>
+    <result property="isSubscribe" column="isSubscribe"/>
+    <result property="updateTime" column="updateTime"/>
+  </resultMap>
+  <select id="select" resultType="java.util.Map" resultMap="rss">select * from rss where 1 = 1 
+    <if test="rssId != null">and rssId = #{rssId}</if>  
+    <if test="rssTitle != null">and rssTitle = #{rssTitle}</if>  
+    <if test="rssUrl != null">and rssUrl = #{rssUrl}</if>  
+    <if test="rssIcon != null">and rssIcon = #{rssIcon}</if>  
+    <if test="fingePrint != null">and fingePrint = #{fingePrint}</if>  
+    <if test="isSubscribe != null">and isSubscribe = #{isSubscribe}</if>  
+    <if test="updateTime != null">and updateTime = #{updateTime}</if>  
+    <if test="condition != null">${condition}</if>
+  </select>
+  <select id="selectList" resultType="java.util.List" resultMap="rss">select * from rss where 1 = 1 
+    <if test="rssId != null">and rssId = #{rssId}</if>  
+    <if test="rssTitle != null">and rssTitle = #{rssTitle}</if>  
+    <if test="rssUrl != null">and rssUrl = #{rssUrl}</if>  
+    <if test="rssIcon != null">and rssIcon = #{rssIcon}</if>  
+    <if test="fingePrint != null">and fingePrint = #{fingePrint}</if>  
+    <if test="isSubscribe != null">and isSubscribe = #{isSubscribe}</if>  
+    <if test="updateTime != null">and updateTime = #{updateTime}</if>  
+    <if test="condition != null">${condition}</if>  
+    <if test="startPage != -1">limit #{startPage},#{page}</if> 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">select count(rssId) from rss where 1 = 1 
+    <if test="rssId != null">and rssId = #{rssId}</if>  
+    <if test="rssTitle != null">and rssTitle = #{rssTitle}</if>  
+    <if test="rssUrl != null">and rssUrl = #{rssUrl}</if>  
+    <if test="rssIcon != null">and rssIcon = #{rssIcon}</if>  
+    <if test="fingePrint != null">and fingePrint = #{fingePrint}</if>  
+    <if test="isSubscribe != null">and isSubscribe = #{isSubscribe}</if>  
+    <if test="updateTime != null">and updateTime = #{updateTime}</if>  
+    <if test="condition != null">${condition}</if> 
+  </select>
+  <insert id="insert" parameterType="Rss">insert into rss (rssId,rssTitle,rssUrl,rssIcon,fingePrint,isSubscribe,updateTime) values (#{rssId},#{rssTitle},#{rssUrl},#{rssIcon},#{fingePrint},#{isSubscribe},#{updateTime})</insert>
+  <update id="update" parameterType="Rss">update rss 
+    <set> 
+      <if test="rssId != null">rssId = #{rssId},</if>
+      <if test="rssTitle != null">rssTitle = #{rssTitle},</if>
+      <if test="rssUrl != null">rssUrl = #{rssUrl},</if>
+      <if test="rssIcon != null">rssIcon = #{rssIcon},</if>
+      <if test="fingePrint != null">fingePrint = #{fingePrint},</if>
+      <if test="isSubscribe != null">isSubscribe = #{isSubscribe},</if>
+      <if test="updateTime != null">updateTime = #{updateTime},</if> 
+    </set> where 1 = 1 
+    <if test="rssId != null">and rssId = #{rssId}</if>
+    <if test="condition != null">${condition}</if>
+  </update>
+  <delete id="delete" parameterType="Rss">delete from rss where 1 = 1 
+    <if test="rssId != null">and rssId = #{rssId}</if>  
+    <if test="rssTitle != null">and rssTitle = #{rssTitle}</if>  
+    <if test="rssUrl != null">and rssUrl = #{rssUrl}</if>  
+    <if test="rssIcon != null">and rssIcon = #{rssIcon}</if>  
+    <if test="fingePrint != null">and fingePrint = #{fingePrint}</if>  
+    <if test="isSubscribe != null">and isSubscribe = #{isSubscribe}</if>  
+    <if test="updateTime != null">and updateTime = #{updateTime}</if>  
+    <if test="condition != null">${condition}</if>
+  </delete>
+  <delete id="deleteByIds" parameterType="Rss">delete from rss where rssId in (${ids})</delete>
+  <select id="maxId" resultType="java.lang.Integer">select max(rssId) from rss</select>
+</mapper>

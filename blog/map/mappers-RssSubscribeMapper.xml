@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.RssSubscribeMapperDao">
+  <resultMap id="rssSubscribe" type="RssSubscribe">
+    <result property="rssSubscribeId" column="rssSubscribeId"/>
+    <result property="rssId" column="rssId"/>
+    <result property="rssTypeId" column="rssTypeId"/>
+  </resultMap>
+  <select id="select" resultType="java.util.Map" resultMap="rssSubscribe">select * from rss_subscribe where 1 = 1 
+    <if test="rssSubscribeId != null">and rssSubscribeId = #{rssSubscribeId}</if>  
+    <if test="rssId != null">and rssId = #{rssId}</if>  
+    <if test="rssTypeId != null">and rssTypeId = #{rssTypeId}</if>  
+    <if test="condition != null">${condition}</if>
+  </select>
+  <select id="selectList" resultType="java.util.List" resultMap="rssSubscribe">select * from rss_subscribe where 1 = 1 
+    <if test="rssSubscribeId != null">and rssSubscribeId = #{rssSubscribeId}</if>  
+    <if test="rssId != null">and rssId = #{rssId}</if>  
+    <if test="rssTypeId != null">and rssTypeId = #{rssTypeId}</if>  
+    <if test="condition != null">${condition}</if>  
+    <if test="startPage != -1">limit #{startPage},#{page}</if> 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">select count(rssSubscribeId) from rss_subscribe where 1 = 1 
+    <if test="rssSubscribeId != null">and rssSubscribeId = #{rssSubscribeId}</if>  
+    <if test="rssId != null">and rssId = #{rssId}</if>  
+    <if test="rssTypeId != null">and rssTypeId = #{rssTypeId}</if>  
+    <if test="condition != null">${condition}</if> 
+  </select>
+  <insert id="insert" parameterType="RssSubscribe">insert into rss_subscribe (rssSubscribeId,rssId,rssTypeId) values (#{rssSubscribeId},#{rssId},#{rssTypeId})</insert>
+  <update id="update" parameterType="RssSubscribe">update rss_subscribe 
+    <set> 
+      <if test="rssSubscribeId != null">rssSubscribeId = #{rssSubscribeId},</if>
+      <if test="rssId != null">rssId = #{rssId},</if>
+      <if test="rssTypeId != null">rssTypeId = #{rssTypeId},</if> 
+    </set> where 1 = 1 
+    <if test="rssSubscribeId != null">and rssSubscribeId = #{rssSubscribeId}</if>
+    <if test="condition != null">${condition}</if>
+  </update>
+  <delete id="delete" parameterType="RssSubscribe">delete from rss_subscribe where 1 = 1 
+    <if test="rssSubscribeId != null">and rssSubscribeId = #{rssSubscribeId}</if>  
+    <if test="rssId != null">and rssId = #{rssId}</if>  
+    <if test="rssTypeId != null">and rssTypeId = #{rssTypeId}</if>  
+    <if test="condition != null">${condition}</if>
+  </delete>
+  <delete id="deleteByIds" parameterType="RssSubscribe">delete from rss_subscribe where rssSubscribeId in (${ids})</delete>
+  <select id="maxId" resultType="java.lang.Integer">select max(rssSubscribeId) from rss_subscribe</select>
+</mapper>

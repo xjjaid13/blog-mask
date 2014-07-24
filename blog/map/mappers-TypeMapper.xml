@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.TypeMapperDao">
+  <resultMap id="type" type="Type">
+    <result property="typeId" column="typeId"/>
+    <result property="typeName" column="typeName"/>
+    <result property="userId" column="userId"/>
+  </resultMap>
+  <select id="select" resultType="java.util.Map" resultMap="type">select * from type where 1 = 1 
+    <if test="typeId != null">and typeId = #{typeId}</if>  
+    <if test="typeName != null">and typeName = #{typeName}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="condition != null">${condition}</if>
+  </select>
+  <select id="selectList" resultType="java.util.List" resultMap="type">select * from type where 1 = 1 
+    <if test="typeId != null">and typeId = #{typeId}</if>  
+    <if test="typeName != null">and typeName = #{typeName}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="condition != null">${condition}</if>  
+    <if test="startPage != -1">limit #{startPage},#{page}</if> 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">select count(typeId) from type where 1 = 1 
+    <if test="typeId != null">and typeId = #{typeId}</if>  
+    <if test="typeName != null">and typeName = #{typeName}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="condition != null">${condition}</if> 
+  </select>
+  <insert id="insert" parameterType="Type">insert into type (typeId,typeName,userId) values (#{typeId},#{typeName},#{userId})</insert>
+  <update id="update" parameterType="Type">update type 
+    <set> 
+      <if test="typeId != null">typeId = #{typeId},</if>
+      <if test="typeName != null">typeName = #{typeName},</if>
+      <if test="userId != null">userId = #{userId},</if> 
+    </set> where 1 = 1 
+    <if test="typeId != null">and typeId = #{typeId}</if>
+    <if test="condition != null">${condition}</if>
+  </update>
+  <delete id="delete" parameterType="Type">delete from type where 1 = 1 
+    <if test="typeId != null">and typeId = #{typeId}</if>  
+    <if test="typeName != null">and typeName = #{typeName}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="condition != null">${condition}</if>
+  </delete>
+  <delete id="deleteByIds" parameterType="Type">delete from type where typeId in (${ids})</delete>
+  <select id="maxId" resultType="java.lang.Integer">select max(typeId) from type</select>
+</mapper>

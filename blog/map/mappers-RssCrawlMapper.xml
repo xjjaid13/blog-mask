@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.RssCrawlMapperDao">
+  <resultMap id="rssCrawl" type="RssCrawl">
+    <result property="rssCrawlId" column="rssCrawlId"/>
+    <result property="rssId" column="rssId"/>
+    <result property="resourceTitle" column="resourceTitle"/>
+    <result property="resourceUrl" column="resourceUrl"/>
+    <result property="updateTime" column="updateTime"/>
+    <result property="resourceDesc" column="resourceDesc"/>
+  </resultMap>
+  <select id="select" resultType="java.util.Map" resultMap="rssCrawl">select * from rss_crawl where 1 = 1 
+    <if test="rssCrawlId != null">and rssCrawlId = #{rssCrawlId}</if>  
+    <if test="rssId != null">and rssId = #{rssId}</if>  
+    <if test="resourceTitle != null">and resourceTitle = #{resourceTitle}</if>  
+    <if test="resourceUrl != null">and resourceUrl = #{resourceUrl}</if>  
+    <if test="updateTime != null">and updateTime = #{updateTime}</if>  
+    <if test="resourceDesc != null">and resourceDesc = #{resourceDesc}</if>  
+    <if test="condition != null">${condition}</if>
+  </select>
+  <select id="selectList" resultType="java.util.List" resultMap="rssCrawl">select * from rss_crawl where 1 = 1 
+    <if test="rssCrawlId != null">and rssCrawlId = #{rssCrawlId}</if>  
+    <if test="rssId != null">and rssId = #{rssId}</if>  
+    <if test="resourceTitle != null">and resourceTitle = #{resourceTitle}</if>  
+    <if test="resourceUrl != null">and resourceUrl = #{resourceUrl}</if>  
+    <if test="updateTime != null">and updateTime = #{updateTime}</if>  
+    <if test="resourceDesc != null">and resourceDesc = #{resourceDesc}</if>  
+    <if test="condition != null">${condition}</if>  
+    <if test="startPage != -1">limit #{startPage},#{page}</if> 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">select count(rssCrawlId) from rss_crawl where 1 = 1 
+    <if test="rssCrawlId != null">and rssCrawlId = #{rssCrawlId}</if>  
+    <if test="rssId != null">and rssId = #{rssId}</if>  
+    <if test="resourceTitle != null">and resourceTitle = #{resourceTitle}</if>  
+    <if test="resourceUrl != null">and resourceUrl = #{resourceUrl}</if>  
+    <if test="updateTime != null">and updateTime = #{updateTime}</if>  
+    <if test="resourceDesc != null">and resourceDesc = #{resourceDesc}</if>  
+    <if test="condition != null">${condition}</if> 
+  </select>
+  <insert id="insert" parameterType="RssCrawl">insert into rss_crawl (rssCrawlId,rssId,resourceTitle,resourceUrl,updateTime,resourceDesc) values (#{rssCrawlId},#{rssId},#{resourceTitle},#{resourceUrl},#{updateTime},#{resourceDesc})</insert>
+  <update id="update" parameterType="RssCrawl">update rss_crawl 
+    <set> 
+      <if test="rssCrawlId != null">rssCrawlId = #{rssCrawlId},</if>
+      <if test="rssId != null">rssId = #{rssId},</if>
+      <if test="resourceTitle != null">resourceTitle = #{resourceTitle},</if>
+      <if test="resourceUrl != null">resourceUrl = #{resourceUrl},</if>
+      <if test="updateTime != null">updateTime = #{updateTime},</if>
+      <if test="resourceDesc != null">resourceDesc = #{resourceDesc},</if> 
+    </set> where 1 = 1 
+    <if test="rssCrawlId != null">and rssCrawlId = #{rssCrawlId}</if>
+    <if test="condition != null">${condition}</if>
+  </update>
+  <delete id="delete" parameterType="RssCrawl">delete from rss_crawl where 1 = 1 
+    <if test="rssCrawlId != null">and rssCrawlId = #{rssCrawlId}</if>  
+    <if test="rssId != null">and rssId = #{rssId}</if>  
+    <if test="resourceTitle != null">and resourceTitle = #{resourceTitle}</if>  
+    <if test="resourceUrl != null">and resourceUrl = #{resourceUrl}</if>  
+    <if test="updateTime != null">and updateTime = #{updateTime}</if>  
+    <if test="resourceDesc != null">and resourceDesc = #{resourceDesc}</if>  
+    <if test="condition != null">${condition}</if>
+  </delete>
+  <delete id="deleteByIds" parameterType="RssCrawl">delete from rss_crawl where rssCrawlId in (${ids})</delete>
+  <select id="maxId" resultType="java.lang.Integer">select max(rssCrawlId) from rss_crawl</select>
+</mapper>

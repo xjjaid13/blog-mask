@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+#recordDiv{
+	box-shadow:0px 0px 10px grey;border-radius:5px;margin-top:20px;
+}
+#recordDiv > div{
+	background-color:white;padding:10px;
+}
+#lastPage,#nextPage{
+	text-decoration : none;
+	cursor : pointer;
+}

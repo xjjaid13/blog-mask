@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.BlogSubjectMapperDao">
+  <resultMap id="blogSubject" type="BlogSubject">
+    <result property="blogSubjectId" column="blogSubjectId"/>
+    <result property="subjectTitle" column="subjectTitle"/>
+    <result property="blogTypeId" column="blogTypeId"/>
+  </resultMap>
+  <select id="select" resultType="java.util.Map" resultMap="blogSubject">select * from blog_subject where 1 = 1 
+    <if test="blogSubjectId != null">and blogSubjectId = #{blogSubjectId}</if>  
+    <if test="subjectTitle != null">and subjectTitle = #{subjectTitle}</if>  
+    <if test="blogTypeId != null">and blogTypeId = #{blogTypeId}</if>  
+    <if test="condition != null">${condition}</if>
+  </select>
+  <select id="selectList" resultType="java.util.List" resultMap="blogSubject">select * from blog_subject where 1 = 1 
+    <if test="blogSubjectId != null">and blogSubjectId = #{blogSubjectId}</if>  
+    <if test="subjectTitle != null">and subjectTitle = #{subjectTitle}</if>  
+    <if test="blogTypeId != null">and blogTypeId = #{blogTypeId}</if>  
+    <if test="condition != null">${condition}</if>  
+    <if test="startPage != -1">limit #{startPage},#{page}</if> 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">select count(blogSubjectId) from blog_subject where 1 = 1 
+    <if test="blogSubjectId != null">and blogSubjectId = #{blogSubjectId}</if>  
+    <if test="subjectTitle != null">and subjectTitle = #{subjectTitle}</if>  
+    <if test="blogTypeId != null">and blogTypeId = #{blogTypeId}</if>  
+    <if test="condition != null">${condition}</if> 
+  </select>
+  <insert id="insert" parameterType="BlogSubject">insert into blog_subject (blogSubjectId,subjectTitle,blogTypeId) values (#{blogSubjectId},#{subjectTitle},#{blogTypeId})</insert>
+  <update id="update" parameterType="BlogSubject">update blog_subject 
+    <set> 
+      <if test="blogSubjectId != null">blogSubjectId = #{blogSubjectId},</if>
+      <if test="subjectTitle != null">subjectTitle = #{subjectTitle},</if>
+      <if test="blogTypeId != null">blogTypeId = #{blogTypeId},</if> 
+    </set> where 1 = 1 
+    <if test="blogSubjectId != null">and blogSubjectId = #{blogSubjectId}</if>
+    <if test="condition != null">${condition}</if>
+  </update>
+  <delete id="delete" parameterType="BlogSubject">delete from blog_subject where 1 = 1 
+    <if test="blogSubjectId != null">and blogSubjectId = #{blogSubjectId}</if>  
+    <if test="subjectTitle != null">and subjectTitle = #{subjectTitle}</if>  
+    <if test="blogTypeId != null">and blogTypeId = #{blogTypeId}</if>  
+    <if test="condition != null">${condition}</if>
+  </delete>
+  <delete id="deleteByIds" parameterType="BlogSubject">delete from blog_subject where blogSubjectId in (${ids})</delete>
+  <select id="maxId" resultType="java.lang.Integer">select max(blogSubjectId) from blog_subject</select>
+  <select id="selectSubjectByType" resultType="java.util.List" resultMap="blogSubject">
+  	select a.* from blog_subject a LEFT JOIN blog_type b on a.blogTypeId = b.blogTypeId where 1 = 1 <if test="blogTypeId != null">b.parentString like '%;${blogTypeId};%'</if> <if test="startPage != -1">limit #{startPage},#{page}</if> 
+  </select>
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.TagMapperDao">
+  <resultMap id="tag" type="Tag">
+    <result property="tagId" column="tagId"/>
+    <result property="tagName" column="tagName"/>
+    <result property="userId" column="userId"/>
+  </resultMap>
+  <select id="select" resultType="java.util.Map" resultMap="tag">select * from tag where 1 = 1 
+    <if test="tagId != null">and tagId = #{tagId}</if>  
+    <if test="tagName != null">and tagName = #{tagName}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="condition != null">${condition}</if>
+  </select>
+  <select id="selectList" resultType="java.util.List" resultMap="tag">select * from tag where 1 = 1 
+    <if test="tagId != null">and tagId = #{tagId}</if>  
+    <if test="tagName != null">and tagName = #{tagName}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="condition != null">${condition}</if>  
+    <if test="startPage != -1">limit #{startPage},#{page}</if> 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">select count(tagId) from tag where 1 = 1 
+    <if test="tagId != null">and tagId = #{tagId}</if>  
+    <if test="tagName != null">and tagName = #{tagName}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="condition != null">${condition}</if> 
+  </select>
+  <insert id="insert" parameterType="Tag">insert into tag (tagId,tagName,userId) values (#{tagId},#{tagName},#{userId})</insert>
+  <update id="update" parameterType="Tag">update tag 
+    <set> 
+      <if test="tagId != null">tagId = #{tagId},</if>
+      <if test="tagName != null">tagName = #{tagName},</if>
+      <if test="userId != null">userId = #{userId},</if> 
+    </set> where 1 = 1 
+    <if test="tagId != null">and tagId = #{tagId}</if>
+    <if test="condition != null">${condition}</if>
+  </update>
+  <delete id="delete" parameterType="Tag">delete from tag where 1 = 1 
+    <if test="tagId != null">and tagId = #{tagId}</if>  
+    <if test="tagName != null">and tagName = #{tagName}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="condition != null">${condition}</if>
+  </delete>
+  <delete id="deleteByIds" parameterType="Tag">delete from tag where tagId in (${ids})</delete>
+  <select id="maxId" resultType="java.lang.Integer">select max(tagId) from tag</select>
+</mapper>

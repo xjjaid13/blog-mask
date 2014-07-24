@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.BlogTypeMapperDao">
+  <resultMap id="blogType" type="BlogType">
+    <result property="blogTypeId" column="blogTypeId"/>
+    <result property="userId" column="userId"/>
+    <result property="typeName" column="typeName"/>
+    <result property="parentId" column="parentId"/>
+    <result property="parentString" column="parentString"/>
+  </resultMap>
+  <select id="select" resultType="java.util.Map" resultMap="blogType">select * from blog_type where 1 = 1 
+    <if test="blogTypeId != null">and blogTypeId = #{blogTypeId}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="typeName != null">and typeName = #{typeName}</if>  
+    <if test="parentId != null">and parentId = #{parentId}</if>  
+    <if test="parentString != null">and parentString = #{parentString}</if>  
+    <if test="condition != null">${condition}</if>
+  </select>
+  <select id="selectList" resultType="java.util.List" resultMap="blogType">select * from blog_type where 1 = 1 
+    <if test="blogTypeId != null">and blogTypeId = #{blogTypeId}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="typeName != null">and typeName = #{typeName}</if>  
+    <if test="parentId != null">and parentId = #{parentId}</if>  
+    <if test="parentString != null">and parentString = #{parentString}</if>  
+    <if test="condition != null">${condition}</if>  
+    <if test="startPage != -1">limit #{startPage},#{page}</if> 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">select count(blogTypeId) from blog_type where 1 = 1 
+    <if test="blogTypeId != null">and blogTypeId = #{blogTypeId}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="typeName != null">and typeName = #{typeName}</if>  
+    <if test="parentId != null">and parentId = #{parentId}</if>  
+    <if test="parentString != null">and parentString = #{parentString}</if>  
+    <if test="condition != null">${condition}</if> 
+  </select>
+  <insert id="insert" parameterType="BlogType">insert into blog_type (blogTypeId,userId,typeName,parentId,parentString) values (#{blogTypeId},#{userId},#{typeName},#{parentId},#{parentString})</insert>
+  <update id="update" parameterType="BlogType">update blog_type 
+    <set> 
+      <if test="blogTypeId != null">blogTypeId = #{blogTypeId},</if>
+      <if test="userId != null">userId = #{userId},</if>
+      <if test="typeName != null">typeName = #{typeName},</if>
+      <if test="parentId != null">parentId = #{parentId},</if>
+      <if test="parentString != null">parentString = #{parentString},</if> 
+    </set> where 1 = 1 
+    <if test="blogTypeId != null">and blogTypeId = #{blogTypeId}</if>
+    <if test="condition != null">${condition}</if>
+  </update>
+  <delete id="delete" parameterType="BlogType">delete from blog_type where 1 = 1 
+    <if test="blogTypeId != null">and blogTypeId = #{blogTypeId}</if>  
+    <if test="userId != null">and userId = #{userId}</if>  
+    <if test="typeName != null">and typeName = #{typeName}</if>  
+    <if test="parentId != null">and parentId = #{parentId}</if>  
+    <if test="parentString != null">and parentString = #{parentString}</if>  
+    <if test="condition != null">${condition}</if>
+  </delete>
+  <delete id="deleteByIds" parameterType="BlogType">delete from blog_type where blogTypeId in (${ids})</delete>
+  <select id="maxId" resultType="java.lang.Integer">select max(blogTypeId) from blog_type</select>
+</mapper>

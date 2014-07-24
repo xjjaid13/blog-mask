@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+.toolDiv{
+	width : 200px;
+}
+#timeMenu{
+	border-radius:5px;
+	color : white;
+}
+#timeTree{
+	background-color:#D8DDE0;text-align:center;margin:0px;max-height:200px;overflow:auto;border-radius:0 0 5px 5px;
+}
+.monthTree{
+	background-color :  #B6B6B6;
+}
+.dayTree{
+	background-color :  #929292;
+}
+.levelTitle {
+    height : 25px;
+    border-radius:5px 5px 0 0;
+	background-image : linear-gradient(to bottom, #FFFFFF, #F2F2F2);
+    padding-top : 7px;
+    color : grey;
+    text-align : center;
+}
+
+#timeTree li{
+    list-style : none;
+}
+#timeTree span {
+    display : block;
+    height : 25px;
+    padding-top : 5px;
+    cursor : pointer;
+}
+#timeTree span>a{
+    color : white;
+}
+#timeTree span>a:hover{
+    color : grey;
+}
+#menu{
+	margin-top : -5px;
+}

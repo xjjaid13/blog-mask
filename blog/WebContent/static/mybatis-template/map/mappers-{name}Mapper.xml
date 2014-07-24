@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.{TableName}MapperDao">
+
+	<resultMap id="{tableName}" type="{TableName}">
+		{for}
+		<result property="{columnName}" column="{columnName}" />
+		{endfor}
+	</resultMap>
+
+	<select id="select" resultType="java.util.Map" resultMap="{tableName}">
+		select * from {tablename} where 1 = 1 
+	   {for}<if test="{columnname} != null"> and {columnname} = {#columnname} </if> {endfor}
+			<if test="condition != null"> ${condition}</if> 
+	</select>
+	
+	<select id="selectList"  resultType="java.util.List" resultMap="{tableName}">
+		select * from {tablename} where 1 = 1 
+	   {for}<if test="{columnname} != null"> and {columnname} = {#columnname} </if> {endfor}
+			<if test="condition != null"> ${condition}</if> 
+	        <if test="startPage != -1"> limit #{startPage},#{page}</if>
+	</select>
+	
+	<select id="selectCount"  resultType="java.lang.Integer" >
+		select count({tableName}Id) from {tablename} where 1 = 1 
+   {for}<if test="{columnname} != null"> and {columnname} = {#columnname}</if> {endfor} 
+		<if test="condition != null"> ${condition}</if> 
+	</select>
+	
+	<insert id="insert" parameterType="{TableName}">
+		insert into {tablename} (
+		{for}{columnname},{endfor}
+		) values (
+		{for}#{{columnName}},{endfor}
+		)
+	</insert>
+	
+	<update id="update" parameterType="{TableName}">
+		update {tablename} 
+		<set>  
+		{for}<if test="{columnname} != null">{columnname} = #{{columnName}},</if>{endfor}
+		</set>
+		where 1 = 1 <if test="{tableName}Id != null"> and {tableName}Id = #{{tableName}Id}</if> 
+		<if test="condition != null"> ${condition}</if> 
+	</update>
+	
+	<delete id="delete" parameterType="{TableName}">
+		delete from {tablename} where 1 = 1 
+   {for}<if test="{columnname} != null"> and {columnname} = {#columnname} </if> {endfor}
+		<if test="condition != null"> ${condition}</if> 
+	</delete>
+	
+	<delete id="deleteByIds" parameterType="{TableName}">
+		delete from {tablename} where {tableName}Id in (${ids})
+	</delete>
+
+	<select id="maxId" resultType="java.lang.Integer">
+		select max({tableName}Id) from {tablename}
+	</select>
+	
+</mapper>
